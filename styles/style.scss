@@ -1,0 +1,55 @@
+:root {
+  --color-dark: #000;
+  --color-light: #fff;
+
+  --color-primary: var(--color-light);
+  --color-secondary: var(--color-dark);
+  --color-brand: #df2b26;
+
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+
+  --font-weight-bold: 700;
+  --font-weight-regular: 400;
+  --font-weight-light: 300;
+
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+
+  --color-background: var(--color-primary);
+  --color-background-overlay: rgba(0, 0, 0, 0.6);
+  --color-background-overlay-2: rgba(0, 0, 0, 0.85);
+  --color-border: #e0e0e0;
+
+  --easing: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@import 'components/index';
+@import 'templates/index';
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+}
+
+//  global styles
+* {
+  min-width: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.section-title {
+  font-size: 24px;
+
+  @media (min-width: $bp-md) {
+    font-size: 32px;
+  }
+}

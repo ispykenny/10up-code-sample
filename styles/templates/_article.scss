@@ -1,0 +1,42 @@
+.article {
+  padding: 80px 0;
+  line-height: 1.7;
+}
+
+.articleAuthor {
+  background: var(--color-primary);
+  position: sticky;
+  bottom: 10px;
+  padding: 0 20px;
+
+  &__inner {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  img {
+    border-radius: 100%;
+  }
+
+  .container {
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.articleTags {
+  display: flex;
+  gap: 10px;
+
+  span {
+    background: var(--color-secondary);
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
+}

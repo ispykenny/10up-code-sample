@@ -1,0 +1,26 @@
+.background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  &__image {
+    transform: scale(1.1);
+    opacity: 0;
+    object-fit: cover;
+    transition: transform 1.5s ease, opacity 1s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--color-background-overlay);
+    z-index: 2;
+  }
+}
+
+.background.is-loaded {
+  .background__image {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

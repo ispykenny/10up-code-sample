@@ -1,0 +1,47 @@
+.hero {
+  position: relative;
+  background: var(--color-background);
+  text-align: center;
+  color: var(--color-light);
+
+  .container {
+    padding: 100px 0px;
+    position: relative;
+    z-index: 3;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.hero__rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+
+  span {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+@media (min-width: $bp-md) {
+  .hero {
+    padding: 42px 0px;
+
+    .container {
+      padding: 120px 0px;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+  }
+}

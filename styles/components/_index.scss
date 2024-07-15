@@ -1,0 +1,24 @@
+$grid-breakpoints: (
+  sm: '580px',
+  md: '767px',
+  lg: '992px',
+  xl: '1199px',
+  xxl: '1440px',
+);
+
+$bp-sm: map-get($grid-breakpoints, 'sm');
+$bp-md: map-get($grid-breakpoints, 'md');
+$bp-lg: map-get($grid-breakpoints, 'lg');
+$bp-xl: map-get($grid-breakpoints, 'xl');
+$bp-xxl: map-get($grid-breakpoints, 'xxl');
+
+@import 'mixins';
+@import 'container';
+@import 'logo';
+@import 'header';
+@import 'hero';
+@import 'background';
+@import 'sleeveText';
+@import 'reviews';
+@import 'rating';
+@import 'footer';

@@ -1,0 +1,26 @@
+$sleeveText-word-count: 3000; // Adjust this to the maximum number of characters you expect
+
+.sleeveText {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.sleeveText__word,
+.sleeveText__space {
+  display: inline-block;
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+// Generate staggered transitions
+@for $i from 0 through $sleeveText-word-count {
+  .sleeveText__word:nth-child(#{$i}),
+  .sleeveText__space:nth-child(#{$i}) {
+    transition-delay: 25ms * $i;
+  }
+}
+
+.sleeveText__word.is-revealed,
+.sleeveText__space.is-revealed {
+  transform: translateY(0);
+}

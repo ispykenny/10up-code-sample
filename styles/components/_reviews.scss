@@ -1,0 +1,155 @@
+.reviews {
+  color: var(--color-text-secondary);
+  padding: 30px 0px;
+
+  &__container {
+    display: grid;
+    justify-content: space-between;
+    // gap: 32px;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    }
+  }
+
+  &__item {
+    background: #414141;
+    padding-bottom: (1170/780 * 100%);
+    grid-column: span 1;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    color: var(--color-light);
+  }
+
+  &__background {
+    position: absolute;
+    inset: 0;
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__background:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+
+  &__content {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    z-index: 3;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  &__author {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      font-weight: var(--font-weight-bold);
+    }
+
+    img {
+      border-radius: 100%;
+    }
+  }
+
+  &__details {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    font-weight: var(--font-weight-bold);
+    gap: 6px;
+    font-size: var(--font-size-sm);
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.reviews__item {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+// stagger video poster cards
+.reviews__container.is-loaded {
+  @for $i from 1 through 4 {
+    .reviews__item:nth-child(#{$i}) {
+      transition-delay: 120ms * $i;
+    }
+  }
+
+  .reviews__item {
+    transform: translateX(0);
+    opacity: 1;
+    transition: opacity 0.8s ease, transform 2.5s var(--easing);
+  }
+}
+
+@media (min-width: $bp-sm) {
+  .reviews {
+    padding: 60px 0px;
+
+    &__background:after {
+      opacity: 0;
+    }
+
+    &__author {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    &__details {
+      transform: translateY(10px);
+      opacity: 0;
+      font-size: var(--font-size-md);
+    }
+
+    &__title {
+      font-size: var(--font-size-xl);
+    }
+  }
+
+  .reviews__item:focus-within,
+  .reviews__item:hover {
+    .reviews__background:after {
+      opacity: 1;
+      transition: opacity 0.6s;
+    }
+    .reviews__author {
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.4s, opacity 0.4s;
+      transition-delay: 100ms;
+    }
+    .reviews__details {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform 0.4s, opacity 0.4s;
+      transition-delay: 100ms;
+    }
+  }
+}

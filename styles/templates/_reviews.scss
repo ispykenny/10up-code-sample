@@ -1,0 +1,21 @@
+.reviews-template {
+  &__nav {
+    ul {
+      @include clearListItems;
+      display: flex;
+      gap: 20px;
+    }
+
+    a {
+      text-decoration: underline;
+      color: var(--color-secondary);
+    }
+  }
+
+  &__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}

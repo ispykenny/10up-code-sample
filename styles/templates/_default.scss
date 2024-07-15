@@ -1,0 +1,12 @@
+.default-template {
+  color: var(--color-text-secondary);
+
+  h1 {
+    font-size: 32px;
+  }
+
+  p {
+    font-size: var(--font-size-lg);
+    line-height: 1.7;
+  }
+}
