@@ -1,6 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
+### Get Started
 
 First, run the development server:
 
@@ -16,21 +14,109 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ENV vars
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+I have included ENV vars into the notes in the submit link
 
-## Learn More
+#### context
 
-To learn more about Next.js, take a look at the following resources:
+This application is using the following tools
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js (app directory) for **RSC** and using **TypeScript**
+- **WPGraphQL** to pull in data
+- WordPress as the CMS (using **ACF**)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Styling
 
-## Deploy on Vercel
+For styling I am using `.SCSS` and `css variables`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Patterns
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Components will have the following patterns
+
+`/components/ComponentName/ComponentName.tsx`
+
+with a sibling file
+
+`/components/ComponentName/index.ts`
+
+This enables cleaner imports like:
+`import { ComponentA, ComponentB } from @/components`
+
+#### GraphQL Queries
+
+GraphlQL Queries are found in `@/queries`
+
+#### TypeScript
+
+Types are found in `@/types`
+
+### Route Examples
+
+---
+
+#### Child Routes
+
+Child routes make the `fetchPageData($slug) (path: api/get-page-data/$slug)` request. This request does the following:
+
+It gets the slug template so it can use the associated graphql query
+
+##### Templates that are supported
+
+- Default
+- Article
+- Review
+
+```
+const pageTemplate = await getPageTemplate(slug);
+
+   const templateQuery: TemplateQueryMap = {
+      [Template.Default]: DefaultTemplateQuery,
+      [Template.Reviews]: DefaultTemplateQuery,
+      [Template.Landing]: LandingTemplateQuery,
+      [Template.undefined]: LandingTemplateQuery,
+    };
+
+  const pageData = await gqlClient.request(
+    templateQuery[pageTemplate as Template],
+    {
+      slug,
+    },
+  );
+
+  return NextResponse.json({
+    status: 200,
+    data: pageData,
+    template: pageTemplate,
+  });
+```
+
+**and the [child]->page.tsx**
+will use:
+
+```
+export default async function ChildPage({
+  params,
+  searchParams,
+}: {
+  params: {
+    child: string;
+  };
+  searchParams: SearchParamTypes;
+}) {
+  const fetchData = await fetchPageData(params.child);
+  const { status, data, template } = await fetchData.json();
+
+  if (status !== 200) {
+    return <div>Error: {status}</div>;
+  }
+
+  const templates: { [key: string]: JSX.Element } = {
+    [Template.Default]: <DefaultTemplate data={data.pageBy} />,
+    [Template.Reviews]: <ReviewTemplate searchParams={searchParams} />,
+  };
+  const TemplateComponent = templates[template] || <>Page not found</>;
+  return TemplateComponent;
+}
+
+```
