@@ -96,7 +96,7 @@
 
 // stagger video poster cards
 .reviews__container.is-loaded {
-  @for $i from 1 through 4 {
+  @for $i from 1 through 20 {
     .reviews__item:nth-child(#{$i}) {
       transition-delay: 120ms * $i;
     }
